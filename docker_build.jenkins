@@ -11,6 +11,17 @@ pipeline {
     buildDiscarder (logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
     timestamps()
           }
+  stages{
+    stage("docker login") {
+      steps {
+            echo "=======================docker login========================="
+            withCredentials([usernamePassword(credentialsID: 'dockerhub_pavelol', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
+            sh """
+            docker login -u $USERNAME -p $PASSWORD
+            """
+            }
+                          }
+        }
   stages {
     stage ("create docker image") {
       steps {
@@ -20,5 +31,13 @@ pipeline {
                              }
             }
         }
+    stages ("docker push") {
+      steps {
+            echo "=======================start pushing images======================"
+            sh """
+            docker push pavelol/toolbox:latest
+            """
+            }
+                           }
                          }
         }
