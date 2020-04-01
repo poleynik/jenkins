@@ -31,10 +31,9 @@ pipeline {
                              }
             }
         }
-    stages {
-      stage ('docker push') {
-            
-      steps {
+  stages {
+      stage ("docker push") {
+        steps {
             echo "=======================start pushing images======================"
             sh """
             docker push pavelol/toolbox:latest
