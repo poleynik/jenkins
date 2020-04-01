@@ -22,7 +22,7 @@ pipeline {
             }
                           }
         }
-  stages {
+  
     stage ("create docker image") {
       steps {
         echo "================ start building image ============="
@@ -31,8 +31,7 @@ pipeline {
                              }
             }
         }
-  stages {
-      stage ("docker push") {
+    stage ("docker push") {
         steps {
             echo "=======================start pushing images======================"
             sh """
@@ -41,4 +40,4 @@ pipeline {
       }      
       }
                            }
-                         }
+                       
