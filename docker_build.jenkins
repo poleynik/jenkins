@@ -12,6 +12,7 @@ pipeline {
     timestamps()
           }
   stages {
+    
     stage ("docker login") {
       steps {
         echo "================docker login================="
@@ -30,5 +31,14 @@ pipeline {
                              }
             }
         }
+    stage ("docker push"){
+      steps {
+          echo "==============================start pushing image======================"
+          sh """
+          docker push pavelol/toolbox:latest
+          """
+            }
+                          }
+      
                          }
 }
